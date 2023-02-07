@@ -1,0 +1,16 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    font-family: 'Helvetica', sans-serif;
+    line-height: 1.2em;
+    background: #283038;
+    background: radial-gradient(circle, #283038 0%, #282c34 100%);
+    justify-content: center;
+    color: #dce4ec;
+    line-height: 1.5;
+}
