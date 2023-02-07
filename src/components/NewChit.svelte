@@ -16,13 +16,13 @@
     }
 </script>
 
-<div class="chit-entry">
+<div class="tweet-entry">
     <textarea bind:value = {newChitValue} placeholder = "Say something..." />
     <button on:click = {createChit} class = "btn-send fa-solid fa-location-arrow" />
 </div>
 
 <style>
-    .chit-entry {
+    .tweet-entry {
         border: 1px solid #62676d22;
         display: flex;
         flex-direction: row;
@@ -35,7 +35,7 @@
         align-items: center;
     }
     
-    .chit-entry textarea {
+    .tweet-entry textarea {
         display: block;
         flex-basis: 90%;
         background-color: #282c34;
@@ -45,7 +45,7 @@
         border: 1px solid #dce4ec22;
     }
 
-    .chit-entry .btn-send {
+    .tweet-entry .btn-send {
         flex-basis: 20px;
         text-align: right;
         background-color: inherit;
