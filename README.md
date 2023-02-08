@@ -1,5 +1,6 @@
 # Chatter-Svelte
 Chatter in Svelte
+This is a very simple tutorial app written in Svelte for creating a simple chatter page, where users can send posts, put likes, and delete posts.
 
 ## Launching the frontend:
 - npm i
