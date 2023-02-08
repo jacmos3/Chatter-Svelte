@@ -1,26 +1,27 @@
-
 <script>
-    import {ChitStore} from "../stores/ChitStore.js";
-    import { UserSessionStore } from "../stores/UserSession.js";
-    let newChitValue;
-
-    function createChit(){
-        console.log("create: ", newChitValue);
-        ChitStore.addNewChit($UserSessionStore.username, "lol", newChitValue);
+    import { UserSessionStore } from "../stores/UserSession";
+    let username; 
+    let password; 
+    
+    function handleLogin() { 
+        console.log(username, password); 
+        UserSessionStore.set({username: username});
     }
 </script>
 
-<div class="chit-entry">
-    <textarea bind:value = {newChitValue} placeholder = "Say something..." />
-    <button on:click = {createChit} class = "btn-send fa-solid fa-location-arrow" />
+
+<div class="login-form">
+    <input placeholder="Username" bind:value={ username } />
+    <input placeholder="Password" bind:value={ password } />
+    <button class="btn-login" on:click={ handleLogin }>Let's Go!</button>
 </div>
 
 <style>
-    .chit-entry {
+    .login-form {
         border: 1px solid #62676d22;
         display: flex;
-        flex-direction: row;
-        padding: 10px 20px;
+        flex-direction: column;
+        padding: 20px 20px;
         font-weight: lighter;
         background-color: #282c34;
         box-shadow: 0px 0px 20px #1d2025;
@@ -28,18 +29,17 @@
         justify-content: space-between;
         align-items: center;
     }
-    
-    .chit-entry textarea {
+    .login-form input, input:active {
         display: block;
-        flex-basis: 90%;
+        flex-basis: 20%;
+        margin-bottom: 10px;
         background-color: #282c34;
         color: #dce4ec;
         font-size: smaller;
         padding: 10px;
         border: 1px solid #dce4ec22;
     }
-
-    .chit-entry .btn-send {
+    .login-form .btn-login {
         flex-basis: 20px;
         text-align: right;
         background-color: inherit;

@@ -1,55 +1,50 @@
 import {writable} from "svelte/store";
+import {incLike, fetchChits, deleteId, createNewChit} from "../backend/Api.js";
 
 function createChitStore(){
     
     const {
         subscribe, 
-        //set, 
+        set, 
         update 
-    } = writable(
-            [{
-                id: 1,
-                author: "Me",
-                handle: "@myself",
-                content: "First chit",
-                likes: 0
-            }]
-        );
+    } = writable([]);
     let counter = 1;
     return {
         subscribe, 
-        //set,
+        set,
         update,
-        generateNewId: () => {
-            ++counter;
-            console.log("counter", counter);
-            return counter;
-        },
-
-        addNewChit: (newChit) => {
-            update( e => [...e, newChit]);
+        addNewChit: async (author, handle, content) => {
+            await createNewChit(author, handle, content);
+            let data = await fetchChits();
+            set(data);
             console.log("Blah");
         },
 
         likeChit: (id) => {
             update(pastChits => {
-                
+                let newCount = 1;
                 pastChits.map((chit) => {
                     if (chit.id == id){
                         chit.likes += 1;
+                        newCount = chit.likes;
                     }
                     console.log("likeChit");
-                    console.log(pastChits);
-                   
                 });
+                incLike(id, newCount);
                 return pastChits;
             });
         },
 
         deleteChit: (id) => {
             update(chits => {
+                deleteId(id);
                 return chits.filter((chit) => {return (chit.id != id)});
             });
+        },
+
+        loadChits: async () =>{
+            let data = await fetchChits();
+            set(data);
         }
     }
 }

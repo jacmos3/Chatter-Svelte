@@ -1,9 +1,14 @@
 <script>
+	import { UserSessionStore } from "./stores/UserSession.js";
+	import { onDestroy } from "svelte";
 	import NewChit from "./components/NewChit.svelte";
 	import AllChits from "./components/AllChits.svelte";
-	import Aside from "./components/Aside.svelte";
 	import TopWaves from "./components/TopWaves.svelte";
 	import Header from "./components/Header.svelte";
+	import LoginForm from "./components/LoginForm.svelte";
+	let sessionData = false;
+	let userSessionStoreUnsub = UserSessionStore.subscribe((data) => sessionData = data);
+	onDestroy(() => userSessionStoreUnsub());
 </script>
 
 <div id="app-container" class="app-container">
@@ -13,11 +18,13 @@
 	<section>
 		<div class="container">
 			<main>
-				<NewChit />
-				<AllChits />
+				{#if !sessionData}
+					<LoginForm />
+				{:else}
+					<NewChit />
+					<AllChits />
+				{/if}
 			</main>
-
-			<!-- <Aside /> -->
 		</div>
 	</section>
 </div>
